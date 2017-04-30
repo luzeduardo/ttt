@@ -1,0 +1,16 @@
+{
+  "short_name": "TTT X#O",
+  "name": "TicTacToe",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#000",
+  "theme_color": "#536878"
+}
