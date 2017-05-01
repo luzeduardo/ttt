@@ -19,8 +19,37 @@ const styles = {
 
 class TicTacToeBoard extends React.Component {
 
+  constructor(props){
+    super(props);
+    let winPositions = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+
+    this.state = {
+      winPositions,
+      ccounter: 0,
+      positionsMarked: []
+    }
+  }
+
+  //se elemento ja foi clicado nao permite clique
   _registerChoice = (e) => {
-    console.log(e.target.id);
+    let position = e.target.id;
+    let positionsMarked = this.state.positionsMarked;
+    if(!positionsMarked.includes(position)){
+      let ccounter = this.state.ccounter + 1;
+      positionsMarked = this.state.positionsMarked;
+      positionsMarked.push(position);
+      this.setState({ccounter, positionsMarked});
+      console.log(this.state);
+    }
   }
 
   render(){
