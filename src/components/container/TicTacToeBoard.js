@@ -15,6 +15,9 @@ const styles = {
   }
 };
 
+const styleA =  {'background':'green'};
+const styleB =  {'background':'blue'};
+
 class TicTacToeBoard extends React.Component {
 
   constructor(props){
@@ -45,10 +48,7 @@ class TicTacToeBoard extends React.Component {
       positionsMarked = this.state.positionsMarked;
       positionsMarked.push(position);
       this._checkPlayer() ? positionsMarkedA.push(position) : positionsMarkedB.push(position);
-      this._checkPlayer() ?
-        positionsColor[position] = {'background':'green'}
-       :positionsColor[position] = {'background':'red'};
-
+      this._checkPlayer() ? positionsColor[position] = styleA : positionsColor[position] = styleB;
       this.setState({ccounter, positionsMarked, positionsMarkedA, positionsMarkedB, positionsColor});
     }
   }
@@ -59,16 +59,14 @@ class TicTacToeBoard extends React.Component {
     if(newState.positionsMarkedA.length >= 2){
       winnerA = this._checkWinner(newState.positionsMarkedA);
       this._validateWinner(winnerA, "A", newState.status);
-      console.log(winnerA, winnerB);
       winnerB = this._checkWinner(newState.positionsMarkedB);
       this._validateWinner(winnerB, "B", newState.status);
-      // console.log(winnerA, winnerB);
     }
 
-    // if(!winnerA && !winnerB && newState.positionsMarkedA.length === 5){
-    //   this.setState({status:"stalemate"})
-    //   console.log("empate");
-    // }
+    if(!winnerA && !winnerB && newState.positionsMarkedA.length === 5){
+      this.setState({status:"stalemate"})
+      console.log("empate");
+    }
   }
   _validateWinner = (statusPlayer, player, status) => {
     if(statusPlayer && status === "playing"){
@@ -77,6 +75,9 @@ class TicTacToeBoard extends React.Component {
   }
 
   _checkWinner = (positions) => {
+    if(this.state.status !== "playing"){
+      return false;
+    }
     let winPositions = [
       [0, 1, 2],
       [3, 4, 5],
@@ -88,10 +89,12 @@ class TicTacToeBoard extends React.Component {
       [2, 4, 6]
     ];
     let result = undefined;
-    let oPositions = positions.sort().toString();
+    let oPositions = positions.sort().toString().split(",");
+    let intersect;
     winPositions.map((mark, idxWinner) => {
-      let oMark = mark.toString();
-      if(!result && positions.length >= 3 && array.intersection([oPositions], [oMark])){
+      let oMark = mark.toString().split(",");
+      intersect = array.intersection(oPositions, oMark);
+      if(!result && positions.length >= 3 && intersect.length === 3){
         result = idxWinner;
       }
       return result;
