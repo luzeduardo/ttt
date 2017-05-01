@@ -24,7 +24,8 @@ class TicTacToeBoard extends React.Component {
       positionsMarked: [],
       positionsMarkedA: [],
       positionsMarkedB: [],
-      positionsColor
+      positionsColor,
+      status: "playing"
     }
   }
 
@@ -47,18 +48,19 @@ class TicTacToeBoard extends React.Component {
        :positionsColor[position] = {'background':'red'};
 
       this.setState({ccounter, positionsMarked, positionsMarkedA, positionsMarkedB, positionsColor});
-      // console.log("A", this.state.positionsMarkedA);
-      // console.log("B", this.state.positionsMarkedB);
     }
 
     if(this.state.positionsMarkedA.length >= 2){
-      this._checkWinner(this.state.positionsMarkedA);
+      let winnerA = this._checkWinner(this.state.positionsMarkedA);
+      let winnerB = this._checkWinner(this.state.positionsMarkedB);
+      console.log("A", winnerA);
+      console.log("B", winnerB);
     }
 
-    if(this.state.positionsMarkedB.length === 3){
-      //empate
+    if(this.state.positionsMarkedB.length === 4){
+      this.setState({status:"stalemate"})
+      console.log("empate");
     }
-    console.log(positionsColor);
   }
 
   _checkWinner = (positions) => {
@@ -72,9 +74,14 @@ class TicTacToeBoard extends React.Component {
       [0, 4, 8],
       [2, 4, 6]
     ];
-    winPositions.map(mark => {
-      console.log(mark.toString().includes(positions));
+    let result = undefined;
+    let oPositions = positions.sort().toString();
+    winPositions.map((mark, idxWinner) => {
+      if(positions.length >= 3 && mark.toString().includes(oPositions)){
+        result = idxWinner;
+      }
     });
+    return result;
   }
 
   render(){
