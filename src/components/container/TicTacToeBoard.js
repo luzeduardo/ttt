@@ -1,5 +1,6 @@
 import React from 'react';
 import Board from '../presentational/Board';
+import array from 'lodash/array';
 
 const styles = {
   root: {
@@ -57,11 +58,11 @@ class TicTacToeBoard extends React.Component {
     let winnerB;
     if(newState.positionsMarkedA.length >= 2){
       winnerA = this._checkWinner(newState.positionsMarkedA);
-      this._validateWinner(winnerA, newState.status);
+      this._validateWinner(winnerA, "A", newState.status);
       console.log(winnerA, winnerB);
       winnerB = this._checkWinner(newState.positionsMarkedB);
-      this._validateWinner(winnerB, newState.status);
-      console.log(winnerA, winnerB);
+      this._validateWinner(winnerB, "B", newState.status);
+      // console.log(winnerA, winnerB);
     }
 
     // if(!winnerA && !winnerB && newState.positionsMarkedA.length === 5){
@@ -90,18 +91,18 @@ class TicTacToeBoard extends React.Component {
     let oPositions = positions.sort().toString();
     winPositions.map((mark, idxWinner) => {
       let oMark = mark.toString();
-      if((positions.length >= 3 && oMark.includes(oPositions)) || oPositions.includes(oMark) ){
+      if(!result && positions.length >= 3 && array.intersection([oPositions], [oMark])){
         result = idxWinner;
       }
+      return result;
     });
-    // result ? console.log(result) : null;
     return result;
   }
 
   render(){
     return (
       <div>
-        <Board cols={3.3} itemLength={9} onClick={this._registerChoice}
+        <Board cols={3.3} itemLength={9} onClick={this.state.status === "playing" ? this._registerChoice: null}
         style={styles.gridList}
         styleRoot={styles.root}
         itemGridStyle={this.state.positionsColor} />
