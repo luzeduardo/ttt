@@ -12,17 +12,15 @@ const styles = {
 
 const ItemBoard = (props) => (
   <GridTile
-    key={props.idx}
+    id={props.id}
     style={styles.gridTile}
-    onClick={
-      e => (console.log(props.idx))
-    }
+    onClick={props.onClick}
   >
   </GridTile>
 );
 
 ItemBoard.propTypes = {
-    idx: PropTypes.number
+    id: PropTypes.number
 }
 
 export default ItemBoard;
