@@ -2,6 +2,7 @@ import React from 'react'
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import AppBar from 'material-ui/AppBar';
+import Board from './presentational/Board'
 
 import Layout from './Layout';
 
@@ -38,11 +39,12 @@ class AppRouter extends React.Component {
             open={this.state.open}
             onRequestChange={(open) => this.setState({open})}
           >
-            <MenuItem onTouchTap={this.handleClose}><Link to="/">New Game</Link></MenuItem>
+            <MenuItem onTouchTap={this.handleClose}><Link to="/new">New Game</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose}><Link to="/">Best PLayers</Link></MenuItem>
           </Drawer>
 
           <Route exact path="/" component={Layout}/>
+          <Route exact path="/new" component={Board}/>
         </div>
       </Router>
     );
