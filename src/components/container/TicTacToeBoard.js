@@ -25,7 +25,8 @@ class TicTacToeBoard extends React.Component {
       positionsMarkedA: [],
       positionsMarkedB: [],
       positionsColor,
-      status: "playing"
+      status: "playing",
+      winner: undefined
     }
   }
 
@@ -49,17 +50,28 @@ class TicTacToeBoard extends React.Component {
 
       this.setState({ccounter, positionsMarked, positionsMarkedA, positionsMarkedB, positionsColor});
     }
+  }
 
-    if(this.state.positionsMarkedA.length >= 2){
-      let winnerA = this._checkWinner(this.state.positionsMarkedA);
-      let winnerB = this._checkWinner(this.state.positionsMarkedB);
-      console.log("A", winnerA);
-      console.log("B", winnerB);
+  componentWillUpdate(newProps, newState){
+    let winnerA;
+    let winnerB;
+    if(newState.positionsMarkedA.length >= 2){
+      winnerA = this._checkWinner(newState.positionsMarkedA);
+      this._validateWinner(winnerA, newState.status);
+      console.log(winnerA, winnerB);
+      winnerB = this._checkWinner(newState.positionsMarkedB);
+      this._validateWinner(winnerB, newState.status);
+      console.log(winnerA, winnerB);
     }
 
-    if(this.state.positionsMarkedB.length === 4){
-      this.setState({status:"stalemate"})
-      console.log("empate");
+    // if(!winnerA && !winnerB && newState.positionsMarkedA.length === 5){
+    //   this.setState({status:"stalemate"})
+    //   console.log("empate");
+    // }
+  }
+  _validateWinner = (statusPlayer, player, status) => {
+    if(statusPlayer && status === "playing"){
+      this.setState({status:"finish", "winner":player});
     }
   }
 
@@ -77,10 +89,12 @@ class TicTacToeBoard extends React.Component {
     let result = undefined;
     let oPositions = positions.sort().toString();
     winPositions.map((mark, idxWinner) => {
-      if(positions.length >= 3 && mark.toString().includes(oPositions)){
+      let oMark = mark.toString();
+      if((positions.length >= 3 && oMark.includes(oPositions)) || oPositions.includes(oMark) ){
         result = idxWinner;
       }
     });
+    // result ? console.log(result) : null;
     return result;
   }
 
