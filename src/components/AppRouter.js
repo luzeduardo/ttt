@@ -2,7 +2,7 @@ import React from 'react'
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import AppBar from 'material-ui/AppBar';
-import Board from './presentational/Board'
+import TicTacToeBoard from './container/TicTacToeBoard'
 
 import Layout from './Layout';
 
@@ -44,7 +44,7 @@ class AppRouter extends React.Component {
           </Drawer>
 
           <Route exact path="/" component={Layout}/>
-          <Route exact path="/new" component={Board}/>
+          <Route exact path="/new" component={TicTacToeBoard}/>
         </div>
       </Router>
     );
