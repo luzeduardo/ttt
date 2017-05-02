@@ -8,10 +8,12 @@ class RegisterWinner extends React.Component {
   constructor(props){
     super(props);
     let results = new Map();
+
     this.state = {
         modalPlayerName: "",
         results,
-        modalOpen: false
+        modalOpen: false,
+        onFinish: props.onFinish
     }
   }
 
@@ -40,6 +42,7 @@ class RegisterWinner extends React.Component {
           modalOpen: false,
           results
       });
+      this.state.onFinish();
   };
 
   render(){
