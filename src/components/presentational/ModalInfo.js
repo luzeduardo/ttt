@@ -6,12 +6,13 @@ export default class ModalInfo extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      open: false
+      open: false,
+      text: ""
     };
   }
 
   componentWillReceiveProps(props){
-    this.setState({open: props.status});
+    this.setState({open: props.status, text: props.text});
   }
 
   handleClose = () => {
@@ -35,7 +36,7 @@ export default class ModalInfo extends React.Component {
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-          Stalemate
+          {this.state.text}
         </Dialog>
       </div>
     );

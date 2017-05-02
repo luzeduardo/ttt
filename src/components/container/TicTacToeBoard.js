@@ -2,6 +2,8 @@ import React from 'react';
 import Board from '../presentational/Board';
 import array from 'lodash/array';
 import ModalInfo from '../presentational/ModalInfo';
+import RegisterWinner from './RegisterWinner';
+
 const styles = {
   root: {
     display: 'flex',
@@ -106,6 +108,7 @@ class TicTacToeBoard extends React.Component {
     return (
       <div>
         <ModalInfo status={this.state.status === "stalemate"} text={this.state.status}/>
+        <RegisterWinner status={this.state.status === "finish"}/>
         <Board cols={3.3} itemLength={9} onClick={this.state.status === "playing" ? this._registerChoice: null}
         style={styles.gridList}
         styleRoot={styles.root}
