@@ -1,7 +1,7 @@
 import React from 'react';
 import Board from '../presentational/Board';
 import array from 'lodash/array';
-
+import ModalInfo from '../presentational/ModalInfo';
 const styles = {
   root: {
     display: 'flex',
@@ -56,18 +56,18 @@ class TicTacToeBoard extends React.Component {
   componentWillUpdate(newProps, newState){
     let winnerA;
     let winnerB;
-    if(newState.positionsMarkedA.length >= 2){
+    if(newState.positionsMarkedA.length >= 2 && this.state.status === "playing"){
       winnerA = this._checkWinner(newState.positionsMarkedA);
       this._validateWinner(winnerA, "A", newState.status);
       winnerB = this._checkWinner(newState.positionsMarkedB);
       this._validateWinner(winnerB, "B", newState.status);
     }
 
-    if(!winnerA && !winnerB && newState.positionsMarkedA.length === 5){
-      this.setState({status:"stalemate"})
-      console.log("empate");
+    if(this.state.status === "playing" && newState.positionsMarkedA.length === 5){
+      this.setState({status:"stalemate"});
     }
   }
+
   _validateWinner = (statusPlayer, player, status) => {
     if(statusPlayer && status === "playing"){
       this.setState({status:"finish", "winner":player});
@@ -95,7 +95,7 @@ class TicTacToeBoard extends React.Component {
       let oMark = mark.toString().split(",");
       intersect = array.intersection(oPositions, oMark);
       if(!result && positions.length >= 3 && intersect.length === 3){
-        result = idxWinner;
+        result = true;
       }
       return result;
     });
@@ -105,6 +105,7 @@ class TicTacToeBoard extends React.Component {
   render(){
     return (
       <div>
+        <ModalInfo status={this.state.status === "stalemate"} text={this.state.status}/>
         <Board cols={3.3} itemLength={9} onClick={this.state.status === "playing" ? this._registerChoice: null}
         style={styles.gridList}
         styleRoot={styles.root}
