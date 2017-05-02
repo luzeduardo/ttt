@@ -36,6 +36,21 @@ class TicTacToeBoard extends React.Component {
     }
   }
 
+  componentWillUpdate(newProps, newState){
+    let winnerA;
+    let winnerB;
+    if(newState.positionsMarkedA.length >= 2 && this.state.status === "playing"){
+      winnerA = this._checkWinner(newState.positionsMarkedA);
+      this._validateWinner(winnerA, "A", newState.status);
+      winnerB = this._checkWinner(newState.positionsMarkedB);
+      this._validateWinner(winnerB, "B", newState.status);
+    }
+
+    if(this.state.status === "playing" && newState.positionsMarkedA.length === 5){
+      this.setState({status:"stalemate"});
+    }
+  }
+
   _checkPlayer = () => this.state.ccounter % 2 === 0
 
   _registerChoice = (e) => {
@@ -52,27 +67,6 @@ class TicTacToeBoard extends React.Component {
       this._checkPlayer() ? positionsMarkedA.push(position) : positionsMarkedB.push(position);
       this._checkPlayer() ? positionsColor[position] = styleA : positionsColor[position] = styleB;
       this.setState({ccounter, positionsMarked, positionsMarkedA, positionsMarkedB, positionsColor});
-    }
-  }
-
-  componentWillUpdate(newProps, newState){
-    let winnerA;
-    let winnerB;
-    if(newState.positionsMarkedA.length >= 2 && this.state.status === "playing"){
-      winnerA = this._checkWinner(newState.positionsMarkedA);
-      this._validateWinner(winnerA, "A", newState.status);
-      winnerB = this._checkWinner(newState.positionsMarkedB);
-      this._validateWinner(winnerB, "B", newState.status);
-    }
-
-    if(this.state.status === "playing" && newState.positionsMarkedA.length === 5){
-      this.setState({status:"stalemate"});
-    }
-  }
-
-  _validateWinner = (statusPlayer, player, status) => {
-    if(statusPlayer && status === "playing"){
-      this.setState({status:"finish", "winner":player});
     }
   }
 
@@ -104,11 +98,17 @@ class TicTacToeBoard extends React.Component {
     return result;
   }
 
+  _validateWinner = (statusPlayer, player, status) => {
+    if(statusPlayer && status === "playing"){
+      this.setState({status:"finish", "winner":player});
+    }
+  }
+
   render(){
     return (
       <div>
         <ModalInfo status={this.state.status === "stalemate"} text={this.state.status}/>
-        <RegisterWinner status={this.state.status === "finish"}/>
+        <RegisterWinner status={this.state.status === "finish" ? true : false}/>
         <Board cols={3.3} itemLength={9} onClick={this.state.status === "playing" ? this._registerChoice: null}
         style={styles.gridList}
         styleRoot={styles.root}

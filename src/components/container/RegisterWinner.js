@@ -6,16 +6,17 @@ import TextField from 'material-ui/TextField';
 class RegisterWinner extends React.Component {
 
   constructor(props){
-    super(props)
+    super(props);
+    let results = new Map();
     this.state = {
-        modalName: "",
-        results: [],
+        modalPlayerName: "",
+        results,
         modalOpen: false
     }
   }
 
   componentWillReceiveProps(props){
-    this.setState({open: props.status});
+    this.setState({modalOpen: props.status});
   }
 
   _modalhandleChange = (event) => {
@@ -27,16 +28,14 @@ class RegisterWinner extends React.Component {
   };
 
   _modalhandleClose = () => {
-      let modalName = this.state.modalName;
-
-      let idx = this.state.results.length - 1;
+      let modalPlayerName = this.state.modalPlayerName;
       let results = this.state.results;
-      let newResult = results[idx];
-
-      newResult = Object.assign(newResult, {
-          'name': modalName,
-      });
-      results[idx] = newResult;
+      let qty = results.get(modalPlayerName);
+      if(!qty){
+        results.set(modalPlayerName, 1);
+      } else {
+        results.set(modalPlayerName, qty++);
+      }
       this.setState({
           modalOpen: false,
           results
@@ -48,7 +47,7 @@ class RegisterWinner extends React.Component {
         <FlatButton
             label="Ok"
             primary={true}
-            disabled={this.state.modalName === ""}
+            disabled={this.state.modalPlayerName === ""}
             keyboardFocused={true}
             onTouchTap={this._modalhandleClose}
         />,
@@ -63,7 +62,7 @@ class RegisterWinner extends React.Component {
           onRequestClose={this._modalhandleClose}>
 
           <TextField
-              id="modalName"
+              id="modalPlayerName"
               hintText="Name"
               fullWidth={true}
               type="text"
