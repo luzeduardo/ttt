@@ -3,6 +3,8 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import AppBar from 'material-ui/AppBar';
 import TicTacToeBoard from './container/TicTacToeBoard'
+// import configureStore from '../store';
+// const store = configureStore();
 
 import {
   BrowserRouter as Router,
