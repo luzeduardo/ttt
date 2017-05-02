@@ -101,14 +101,25 @@ class TicTacToeBoard extends React.Component {
   _validateWinner = (statusPlayer, player, status) => {
     if(statusPlayer && status === "playing"){
       this.setState({status:"finish", "winner":player});
+      // this.setState({
+      //   ccounter: 0,
+      //   positionsMarked: [],
+      //   positionsMarkedA: [],
+      //   positionsMarkedB: [],
+      //   positionsColor,
+      //   status: "playing",
+      //   winner: undefined
+      // });
     }
   }
 
   render(){
+    //ao finalizar listar em modal e limpar jogo
     return (
       <div>
         <ModalInfo status={this.state.status === "stalemate"} text={this.state.status}/>
-        <RegisterWinner status={this.state.status === "finish" ? true : false}/>
+        {/* <ModalWinners status={this.state.status === "finish"} text={this.state.results}/> */}
+        <RegisterWinner status={this.state.status === "finish" ? true : false} />
         <Board cols={3.3} itemLength={9} onClick={this.state.status === "playing" ? this._registerChoice: null}
         style={styles.gridList}
         styleRoot={styles.root}

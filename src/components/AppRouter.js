@@ -3,8 +3,8 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import AppBar from 'material-ui/AppBar';
 import TicTacToeBoard from './container/TicTacToeBoard'
-
-import Layout from './Layout';
+// import configureStore from '../store';
+// const store = configureStore();
 
 import {
   BrowserRouter as Router,
@@ -39,12 +39,11 @@ class AppRouter extends React.Component {
             open={this.state.open}
             onRequestChange={(open) => this.setState({open})}
           >
-            <MenuItem onTouchTap={this.handleClose}><Link to="/new">New Game</Link></MenuItem>
-            <MenuItem onTouchTap={this.handleClose}><Link to="/">Best PLayers</Link></MenuItem>
+            <MenuItem onTouchTap={this.handleClose}><Link to="/">New Game</Link></MenuItem>
           </Drawer>
 
-          <Route exact path="/" component={Layout}/>
-          <Route exact path="/new" component={TicTacToeBoard}/>
+          <Route exact path="/" component={TicTacToeBoard}/>
+
         </div>
       </Router>
     );
