@@ -1,9 +1,9 @@
 const winnerList = (state = {}, action) => {
   switch (action.type) {
     case 'REGISTER_WINNER':
-      let results = action.results;
+      let players = action.players;
       return Object.assign({}, state, {
-        results
+        players
       });
     default:
       return state;

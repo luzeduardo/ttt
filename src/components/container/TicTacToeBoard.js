@@ -105,7 +105,11 @@ class TicTacToeBoard extends React.Component {
 
   _validateWinner = (statusPlayer, player, status) => {
     if(statusPlayer && status === "playing"){
-      this.setState({status:"finish", "winner":player});
+      this.setState({status:"finish", "winner": player});
+      let players = this.props.players.players;
+      let qty = players[player]
+      players[player] = ++qty
+      this.props.dispatch({type:'REGISTER_WINNER', players});
     }
   }
 
@@ -124,7 +128,7 @@ class TicTacToeBoard extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  results: state.winnerList,
+  players: state.playerNames,
   uiControl: state.uiControl
 });
 export {TicTacToeBoard};
