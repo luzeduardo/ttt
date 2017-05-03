@@ -13,7 +13,7 @@ export default class ModalWinner extends React.Component {
 
   componentWillReceiveProps(props){
     this.setState({open: props.status, results: props.results || []});
-    console.log(props.results);
+    // console.log(props.results);
   }
 
   handleClose = () => {

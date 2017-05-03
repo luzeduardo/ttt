@@ -2,6 +2,7 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import {connect} from 'react-redux';
 
 class RegisterWinner extends React.Component {
 
@@ -38,6 +39,7 @@ class RegisterWinner extends React.Component {
       } else {
         results.set(modalPlayerName, qty++);
       }
+
       this.setState({
           modalOpen: false,
           results
@@ -75,4 +77,9 @@ class RegisterWinner extends React.Component {
   }
 }
 
-export default RegisterWinner;
+const mapStateToProps = (state) => ({
+  results: state.results,
+});
+
+export {RegisterWinner};
+export default (connect(mapStateToProps)(RegisterWinner));

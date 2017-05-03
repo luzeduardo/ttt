@@ -3,8 +3,10 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import AppBar from 'material-ui/AppBar';
 import TicTacToeBoard from './container/TicTacToeBoard'
-// import configureStore from '../store';
-// const store = configureStore();
+import configureStore from '../store';
+import { Provider } from 'react-redux';
+
+const store = configureStore();
 
 import {
   BrowserRouter as Router,
@@ -24,28 +26,28 @@ class AppRouter extends React.Component {
 
   render() {
     return (
-      <Router>
-        <div>
+      <Provider store={store}>
+        <Router>
+          <div>
+            <AppBar
+              title="TicTacToe"
+              onTouchTap={this.handleToggle}
+              iconClassNameRight="muidocs-icon-navigation-expand-more"
+            />
 
-          <AppBar
-            title="TTT X#O"
-            onTouchTap={this.handleToggle}
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
-          />
+            <Drawer
+              docked={false}
+              width={200}
+              open={this.state.open}
+              onRequestChange={(open) => this.setState({open})}
+            >
+              <MenuItem onTouchTap={this.handleClose}><Link to="/">New Game</Link></MenuItem>
+            </Drawer>
 
-          <Drawer
-            docked={false}
-            width={200}
-            open={this.state.open}
-            onRequestChange={(open) => this.setState({open})}
-          >
-            <MenuItem onTouchTap={this.handleClose}><Link to="/">New Game</Link></MenuItem>
-          </Drawer>
-
-          <Route exact path="/" component={TicTacToeBoard}/>
-
-        </div>
-      </Router>
+            <Route exact path="/" component={TicTacToeBoard}/>
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }

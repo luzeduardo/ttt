@@ -1,7 +1,7 @@
-const winnerReducer = (state = {}, action) => {
+const winnerList = (state = {}, action) => {
   switch (action.type) {
     case 'REGISTER_WINNER':
-      let results = action.data;
+      let results = action.results;
       return Object.assign({}, state, {
         results
       });
@@ -10,4 +10,4 @@ const winnerReducer = (state = {}, action) => {
   }
 }
 
-export default winnerReducer;
+export default winnerList;

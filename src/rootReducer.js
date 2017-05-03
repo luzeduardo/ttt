@@ -1,9 +1,8 @@
 import {combineReducers} from 'redux';
-import winnerReducer from './components/reducer/winnerReducer';
+import winnerList from './components/reducer/winnerReducer';
 
 const reducers = {
-  winnerReducer
+  winnerList
 }
-
 const rootReducer = combineReducers(reducers);
 export default rootReducer;

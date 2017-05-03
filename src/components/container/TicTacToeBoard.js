@@ -4,6 +4,7 @@ import array from 'lodash/array';
 import ModalInfo from '../presentational/ModalInfo';
 import ModalWinner from '../presentational/ModalWinner';
 import RegisterWinner from './RegisterWinner';
+import {connect} from 'react-redux';
 
 const styles = {
   root: {
@@ -25,7 +26,13 @@ class TicTacToeBoard extends React.Component {
 
   constructor(props){
     super(props);
+    let results = {"Eduardo":1};
+    this.props.dispatch({type:'REGISTER_WINNER', results});
     this._reset();
+  }
+
+  componentWillReceiveProps = (props) => {
+      console.log('componentWillReceiveProps', props.results.results);
   }
 
   componentWillUpdate(newProps, newState){
@@ -110,7 +117,6 @@ class TicTacToeBoard extends React.Component {
   }
 
   render(){
-    //ao finalizar listar em modal e limpar jogo
     return (
       <div>
         <ModalInfo status={this.state.status === "stalemate"} text={this.state.status}/>
@@ -125,4 +131,8 @@ class TicTacToeBoard extends React.Component {
   }
 }
 
-export default TicTacToeBoard;
+const mapStateToProps = (state) => ({
+  results: state.winnerList
+});
+export {TicTacToeBoard};
+export default connect(mapStateToProps)(TicTacToeBoard);
