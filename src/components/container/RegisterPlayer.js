@@ -4,17 +4,14 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import {connect} from 'react-redux';
 
-class RegisterWinner extends React.Component {
+class RegisterPlayer extends React.Component {
 
   constructor(props){
     super(props);
-    let results = new Map();
-
     this.state = {
-        modalPlayerName: "",
-        results,
-        modalOpen: false,
-        onFinish: props.onFinish
+        modalPlayerName1: "",
+        modalPlayerName2: "",
+        modalOpen: props.status
     }
   }
 
@@ -31,20 +28,15 @@ class RegisterWinner extends React.Component {
   };
 
   _modalhandleClose = () => {
-      let modalPlayerName = this.state.modalPlayerName;
-      let results = this.state.results;
-      let qty = results.get(modalPlayerName);
-      if(!qty){
-        results.set(modalPlayerName, 1);
-      } else {
-        results.set(modalPlayerName, qty++);
-      }
+      let modalPlayerName1 = this.state.modalPlayerName1;
+      let modalPlayerName2 = this.state.modalPlayerName2;
+      let players = {[modalPlayerName1]:0, [modalPlayerName2]:0};
+      this.props.dispatch({type:'REGISTER_PLAYERS', players});
+      this.props.dispatch({type:'MODAL_PLAYER_CLOSE'});
 
       this.setState({
           modalOpen: false,
-          results
       });
-      this.state.onFinish();
   };
 
   render(){
@@ -52,7 +44,7 @@ class RegisterWinner extends React.Component {
         <FlatButton
             label="Ok"
             primary={true}
-            disabled={this.state.modalPlayerName === ""}
+            disabled={this.state.modalPlayerName1 === "" || this.state.modalPlayerName2 === ""}
             keyboardFocused={true}
             onTouchTap={this._modalhandleClose}
         />,
@@ -60,15 +52,21 @@ class RegisterWinner extends React.Component {
 
     return(
       <Dialog
-          title="Inform"
+          title="Inform your names"
           actions={modalActions}
           modal={true}
           open={this.state.modalOpen}
           onRequestClose={this._modalhandleClose}>
 
           <TextField
-              id="modalPlayerName"
-              hintText="Name"
+              id="modalPlayerName1"
+              hintText="Player 1"
+              fullWidth={true}
+              type="text"
+              onChange={this._modalhandleChange}/>
+          <TextField
+              id="modalPlayerName2"
+              hintText="Player 2"
               fullWidth={true}
               type="text"
               onChange={this._modalhandleChange}/>
@@ -78,8 +76,9 @@ class RegisterWinner extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  results: state.results,
+  players: state.playerNames,
+  uiControl: state.uiControl
 });
 
-export {RegisterWinner};
-export default (connect(mapStateToProps)(RegisterWinner));
+export {RegisterPlayer};
+export default (connect(mapStateToProps)(RegisterPlayer));

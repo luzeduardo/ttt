@@ -2,8 +2,7 @@ import React from 'react';
 import Board from '../presentational/Board';
 import array from 'lodash/array';
 import ModalInfo from '../presentational/ModalInfo';
-import ModalWinner from '../presentational/ModalWinner';
-import RegisterWinner from './RegisterWinner';
+import RegisterPlayer from './RegisterPlayer';
 import {connect} from 'react-redux';
 
 const styles = {
@@ -26,13 +25,7 @@ class TicTacToeBoard extends React.Component {
 
   constructor(props){
     super(props);
-    let results = {"Eduardo":1};
-    this.props.dispatch({type:'REGISTER_WINNER', results});
     this._reset();
-  }
-
-  componentWillReceiveProps = (props) => {
-      console.log('componentWillReceiveProps', props.results.results);
   }
 
   componentWillUpdate(newProps, newState){
@@ -58,7 +51,7 @@ class TicTacToeBoard extends React.Component {
       positionsMarkedA: [],
       positionsMarkedB: [],
       positionsColor,
-      status: "playing",
+      status: "start",
       winner: undefined
     }
   }
@@ -78,7 +71,7 @@ class TicTacToeBoard extends React.Component {
       positionsMarked.push(position);
       this._checkPlayer() ? positionsMarkedA.push(position) : positionsMarkedB.push(position);
       this._checkPlayer() ? positionsColor[position] = styleA : positionsColor[position] = styleB;
-      this.setState({ccounter, positionsMarked, positionsMarkedA, positionsMarkedB, positionsColor});
+      this.setState({status: "playing", ccounter, positionsMarked, positionsMarkedA, positionsMarkedB, positionsColor});
     }
   }
 
@@ -120,9 +113,8 @@ class TicTacToeBoard extends React.Component {
     return (
       <div>
         <ModalInfo status={this.state.status === "stalemate"} text={this.state.status}/>
-        <ModalWinner status={this.state.status === "finish"} results={this.state.results}/>
-        <RegisterWinner status={this.state.status === "finish" ? true : false} onFinish={this._reset} />
-        <Board cols={3.3} itemLength={9} onClick={this.state.status === "playing" ? this._registerChoice: null}
+        <RegisterPlayer status={this.props.uiControl.modalRegisterPlayer}/>
+        <Board cols={3.3} itemLength={9} onClick={this.state.status === "playing" || this.state.status === "start" ? this._registerChoice: null}
         style={styles.gridList}
         styleRoot={styles.root}
         itemGridStyle={this.state.positionsColor} />
@@ -132,7 +124,8 @@ class TicTacToeBoard extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  results: state.winnerList
+  results: state.winnerList,
+  uiControl: state.uiControl
 });
 export {TicTacToeBoard};
 export default connect(mapStateToProps)(TicTacToeBoard);
