@@ -43,6 +43,7 @@ class ModalWinner extends React.Component {
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
+          autoScrollBodyContent={true}
         >
           <List>
             {this.state.winners.map((playerWins, index) =>

@@ -9,7 +9,9 @@ const playerNames = (state = {}, action) => {
         players:winners
       });
     case 'REGISTER_PLAYERS':
-      let players = action.players;
+      let newPlayers = action.players;
+      let oldPlayers = state.players;
+      var players = Object.assign({}, oldPlayers, newPlayers);
       return Object.assign({}, state, {
         players
       });
