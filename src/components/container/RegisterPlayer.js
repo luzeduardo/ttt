@@ -44,7 +44,11 @@ class RegisterPlayer extends React.Component {
         <FlatButton
             label="Ok"
             primary={true}
-            disabled={this.state.modalPlayerName1 === "" || this.state.modalPlayerName2 === ""}
+            disabled={
+              this.state.modalPlayerName1 === ""
+              || this.state.modalPlayerName2 === ""
+              || this.state.modalPlayerName1 === this.state.modalPlayerName2
+            }
             keyboardFocused={true}
             onTouchTap={this._modalhandleClose}
         />,

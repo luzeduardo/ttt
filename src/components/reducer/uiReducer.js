@@ -4,6 +4,14 @@ const uiControl = (state = {}, action) => {
       return Object.assign({}, state, {
         modalRegisterPlayer: false
       });
+    case 'MODAL_WINNER_OPEN':
+      return Object.assign({}, state, {
+        modalWinnerList: true
+      });
+    case 'MODAL_WINNER_CLOSE':
+      return Object.assign({}, state, {
+        modalWinnerList: false
+      });
     default:
       return state;
   }

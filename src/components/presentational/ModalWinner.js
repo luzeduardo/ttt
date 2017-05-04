@@ -1,24 +1,23 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import {connect} from 'react-redux';
 
-export default class ModalWinner extends React.Component {
+class ModalWinner extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      open: false,
-      results: []
+      open: props.status
     };
-  }
-
-  componentWillReceiveProps(props){
-    this.setState({open: props.status, results: props.results || []});
-    // console.log(props.results);
   }
 
   handleClose = () => {
     this.setState({open: false});
   };
+
+  componentWillReceiveProps(props){
+    this.setState({modalOpen: props.status});
+  }
 
   render() {
     const actions = [
@@ -37,7 +36,7 @@ export default class ModalWinner extends React.Component {
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-        {this.state.results.map((x) =>
+        {this.props.players.length && this.props.players.players.map((x) =>
           {x}
         )}
         </Dialog>
@@ -45,3 +44,11 @@ export default class ModalWinner extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  players: state.playerNames,
+  uiControl: state.uiControl
+});
+
+export {ModalWinner};
+export default (connect(mapStateToProps)(ModalWinner));

@@ -3,6 +3,7 @@ import Board from '../presentational/Board';
 import array from 'lodash/array';
 import ModalInfo from '../presentational/ModalInfo';
 import RegisterPlayer from './RegisterPlayer';
+import ModalWinner from '../presentational/ModalWinner';
 import {connect} from 'react-redux';
 
 const styles = {
@@ -106,10 +107,8 @@ class TicTacToeBoard extends React.Component {
   _validateWinner = (statusPlayer, player, status) => {
     if(statusPlayer && status === "playing"){
       this.setState({status:"finish", "winner": player});
-      // let players = this.props.players.players;
-      // let qty = players[player]
-      // players[player] = ++qty
       this.props.dispatch({type:'REGISTER_WINNER', player});
+      this.props.dispatch({type:'MODAL_WINNER_OPEN'});
     }
   }
 
@@ -118,6 +117,8 @@ class TicTacToeBoard extends React.Component {
       <div>
         <ModalInfo status={this.state.status === "stalemate"} text={this.state.status}/>
         <RegisterPlayer status={this.props.uiControl.modalRegisterPlayer}/>
+        <ModalWinner status={this.props.uiControl.modalWinnerList}/>
+
         <Board cols={3.3} itemLength={9} onClick={this.state.status === "playing" || this.state.status === "start" ? this._registerChoice: null}
         style={styles.gridList}
         styleRoot={styles.root}

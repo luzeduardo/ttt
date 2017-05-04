@@ -2,7 +2,8 @@ import {createStore, compose} from 'redux';
 import rootReducer from './rootReducer';
 export default function configureStore(initialState = {
   uiControl:{
-    modalRegisterPlayer:true
+    modalRegisterPlayer:true,
+    modalWinnerList:false
   }
 }){
   const store  = createStore(rootReducer, initialState, compose(
