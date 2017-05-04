@@ -1,7 +1,6 @@
 import React from 'react';
 import Board from '../presentational/Board';
 import array from 'lodash/array';
-import ModalInfo from '../presentational/ModalInfo';
 import RegisterPlayer from './RegisterPlayer';
 import ModalWinner from '../presentational/ModalWinner';
 import {connect} from 'react-redux';
@@ -117,7 +116,6 @@ class TicTacToeBoard extends React.Component {
   render(){
     return (
       <div>
-        <ModalInfo status={this.state.status === "stalemate"} text={this.state.status}/>
         <RegisterPlayer status={this.props.uiControl.modalRegisterPlayer}/>
         <ModalWinner status={this.props.uiControl.modalWinnerList}/>
 
