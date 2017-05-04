@@ -20,10 +20,11 @@ class ModalWinner extends React.Component {
   };
 
   componentWillReceiveProps(props){
+    let players = props.players.players;
     this.setState({
       open: props.status,
-      winners: object.values(props.players.players),
-      winnerNames: Object.keys(props.players.players)
+      winners: object.values(players).sort().reverse(),
+      winnerNames: Object.keys(players).sort(function(a,b){return players[a]-players[b]}).reverse()
     });
   }
 
