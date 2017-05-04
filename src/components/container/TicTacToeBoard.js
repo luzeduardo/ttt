@@ -106,10 +106,10 @@ class TicTacToeBoard extends React.Component {
   _validateWinner = (statusPlayer, player, status) => {
     if(statusPlayer && status === "playing"){
       this.setState({status:"finish", "winner": player});
-      let players = this.props.players.players;
-      let qty = players[player]
-      players[player] = ++qty
-      this.props.dispatch({type:'REGISTER_WINNER', players});
+      // let players = this.props.players.players;
+      // let qty = players[player]
+      // players[player] = ++qty
+      this.props.dispatch({type:'REGISTER_WINNER', player});
     }
   }
 
