@@ -35,7 +35,7 @@ class RegisterPlayer extends React.Component {
       this.props.dispatch({type:'MODAL_PLAYER_CLOSE'});
 
       this.setState({
-          modalOpen: false,
+          modalOpen: false
       });
   };
 

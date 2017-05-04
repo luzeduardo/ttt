@@ -2,12 +2,15 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import {connect} from 'react-redux';
+import {List, ListItem} from 'material-ui/List';
+import object from 'lodash/object';
 
 class ModalWinner extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      open: props.status
+      open: props.status,
+      winners: []
     };
   }
 
@@ -16,7 +19,11 @@ class ModalWinner extends React.Component {
   };
 
   componentWillReceiveProps(props){
-    this.setState({modalOpen: props.status});
+    this.setState({
+      open: props.status,
+      winners: object.values(props.players.players),
+      winnerNames: Object.keys(props.players.players)
+    });
   }
 
   render() {
@@ -36,9 +43,16 @@ class ModalWinner extends React.Component {
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-        {this.props.players.length && this.props.players.players.map((x) =>
-          {x}
-        )}
+          <List>
+            {this.state.winners.map((playerWins, index) =>
+                <ListItem
+                key={index}
+                primaryText={
+                  <p>{this.state.winnerNames[index]} - {playerWins}</p>
+                }
+                />
+            )}
+          </List>
         </Dialog>
       </div>
     );
