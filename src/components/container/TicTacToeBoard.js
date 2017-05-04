@@ -26,17 +26,18 @@ class TicTacToeBoard extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = this._reset();    
+    this.state = this._reset();
   }
 
   componentWillUpdate(newProps, newState){
     let winnerA;
     let winnerB;
     if(newState.positionsMarkedA.length >= 2 && this.state.status === "playing"){
+      let playersNow = Object.keys(this.props.players.players);
       winnerA = this._checkWinner(newState.positionsMarkedA);
-      this._validateWinner(winnerA, "A", newState.status);
+      this._validateWinner(winnerA, playersNow[0] , newState.status);
       winnerB = this._checkWinner(newState.positionsMarkedB);
-      this._validateWinner(winnerB, "B", newState.status);
+      this._validateWinner(winnerB, playersNow[1], newState.status);
     }
 
     if(this.state.status === "playing" && newState.positionsMarkedA.length === 5){

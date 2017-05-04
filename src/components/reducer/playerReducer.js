@@ -11,7 +11,7 @@ const playerNames = (state = {}, action) => {
     case 'REGISTER_PLAYERS':
       let newPlayers = action.players;
       let oldPlayers = state.players;
-      var players = Object.assign({}, oldPlayers, newPlayers);
+      var players = Object.assign({}, newPlayers, oldPlayers);
       return Object.assign({}, state, {
         players
       });
