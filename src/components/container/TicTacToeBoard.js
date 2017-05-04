@@ -26,7 +26,7 @@ class TicTacToeBoard extends React.Component {
 
   constructor(props){
     super(props);
-    this._reset();
+    this.state = this._reset();    
   }
 
   componentWillUpdate(newProps, newState){
@@ -46,7 +46,7 @@ class TicTacToeBoard extends React.Component {
 
   _reset(){
     let positionsColor = Array.from([].fill.call({ length: 9 }, {'background':'black'} ));
-    this.state = {
+    return {
       ccounter: 0,
       positionsMarked: [],
       positionsMarkedA: [],
@@ -109,6 +109,7 @@ class TicTacToeBoard extends React.Component {
       this.setState({status:"finish", "winner": player});
       this.props.dispatch({type:'REGISTER_WINNER', player});
       this.props.dispatch({type:'MODAL_WINNER_OPEN'});
+      this.setState(this._reset());
     }
   }
 
