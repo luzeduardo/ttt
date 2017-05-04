@@ -128,9 +128,14 @@ class TicTacToeBoard extends React.Component {
   }
 }
 
+/*
+  Get the props from the store and share inside the component
+*/
 const mapStateToProps = (state) => ({
   players: state.playerNames,
   uiControl: state.uiControl
 });
+/*export the plain component that will be used for unittest without store*/
 export {TicTacToeBoard};
+/*connects the component to the store*/
 export default connect(mapStateToProps)(TicTacToeBoard);

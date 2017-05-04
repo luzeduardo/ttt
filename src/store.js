@@ -1,3 +1,6 @@
+/*
+  Maintain the state shared between the connected components
+*/
 import {createStore, compose} from 'redux';
 import rootReducer from './rootReducer';
 export default function configureStore(initialState = {

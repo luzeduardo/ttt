@@ -1,3 +1,6 @@
+/*
+  Reducer to control the Ui state change of the game
+*/
 const uiControl = (state = {}, action) => {
   switch (action.type) {
     case 'MODAL_PLAYER_OPEN':
