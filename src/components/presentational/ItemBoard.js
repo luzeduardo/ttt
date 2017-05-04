@@ -12,7 +12,9 @@ const ItemBoard = (props) => (
 );
 
 ItemBoard.propTypes = {
-    id: PropTypes.number
+    id: PropTypes.number,
+    style: PropTypes.object,
+    onClick: PropTypes.func
 }
 
 export default ItemBoard;
