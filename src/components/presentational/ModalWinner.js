@@ -15,7 +15,8 @@ class ModalWinner extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({open: false});
+    this.props.dispatch({type:'MODAL_WINNER_CLOSE'});
+    this.props.dispatch({type:'MODAL_PLAYER_OPEN'});
   };
 
   componentWillReceiveProps(props){

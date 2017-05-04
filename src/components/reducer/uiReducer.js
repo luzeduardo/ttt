@@ -1,5 +1,9 @@
 const uiControl = (state = {}, action) => {
   switch (action.type) {
+    case 'MODAL_PLAYER_OPEN':
+      return Object.assign({}, state, {
+        modalRegisterPlayer: true
+      });
     case 'MODAL_PLAYER_CLOSE':
       return Object.assign({}, state, {
         modalRegisterPlayer: false
