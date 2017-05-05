@@ -38,10 +38,14 @@ class RegisterPlayer extends React.Component {
       this.props.dispatch({type:'REGISTER_PLAYERS', players});
       this.props.dispatch({type:'MODAL_PLAYER_CLOSE'});
 
-      this.setState({
-          modalOpen: false
-      });
+      this._modalClose();
   };
+
+  _modalClose = () => {
+    this.setState({
+        modalOpen: false
+    });
+  }
 
   render(){
     const modalActions = [
@@ -53,9 +57,8 @@ class RegisterPlayer extends React.Component {
               || this.state.modalPlayerName2 === ""
               || this.state.modalPlayerName1 === this.state.modalPlayerName2
             }
-            keyboardFocused={true}
             onTouchTap={this._modalhandleClose}
-        />,
+        />
     ];
 
     return(
@@ -68,6 +71,7 @@ class RegisterPlayer extends React.Component {
 
           <TextField
               id="modalPlayerName1"
+              keyboardFocused={true}
               hintText="Player 1"
               fullWidth={true}
               type="text"

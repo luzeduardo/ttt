@@ -44,6 +44,9 @@ class TicTacToeBoard extends React.Component {
     }
   }
 
+  /**
+    Method to cleanup the board reseting state
+  */
   _reset(){
     let positionsColor = Array.from([].fill.call({ length: 9 }, {'background':'black'} ));
     return {
@@ -59,6 +62,9 @@ class TicTacToeBoard extends React.Component {
 
   _checkPlayer = () => this.state.ccounter % 2 === 0
 
+  /**
+    Method that separates each position by player in separated arrays
+  */
   _registerChoice = (e) => {
     let position = e.target.id;
     let positionsMarked = this.state.positionsMarked;
@@ -76,6 +82,11 @@ class TicTacToeBoard extends React.Component {
     }
   }
 
+  /**
+    Method called when player one has 2 positions on board
+    and compares with a list of winner positions
+    When player position matches win positions
+  */
   _checkWinner = (positions) => {
     if(this.state.status !== "playing"){
       return false;
@@ -104,6 +115,11 @@ class TicTacToeBoard extends React.Component {
     return result;
   }
 
+  /**
+  Method that dispatch an event to regiter the winner,
+  call method to cleanup the board and
+  dispatch another event to show winner list modal
+  */
   _validateWinner = (statusPlayer, player, status) => {
     if(statusPlayer && status === "playing"){
       this.setState({status:"finish", "winner": player});
