@@ -71,7 +71,6 @@ class RegisterPlayer extends React.Component {
 
           <TextField
               id="modalPlayerName1"
-              keyboardFocused={true}
               hintText="Player 1"
               fullWidth={true}
               type="text"
