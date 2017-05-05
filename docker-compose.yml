@@ -1,0 +1,12 @@
+version: '2'
+services:
+ web:
+    build:
+      context: .
+    container_name: ttt
+    ports:
+     - "3000:3000"
+    volumes:
+     - ./:/usr/src/app
+     - ./entrypoint.sh:/usr/bin/entrypoint
+    restart: always
