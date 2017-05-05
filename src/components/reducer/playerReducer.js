@@ -14,7 +14,8 @@ const playerNames = (state = {}, action) => {
       let qty = winners[player]
       winners[player] = ++qty
       return Object.assign({}, state, {
-        players:winners
+        players:winners,
+        last: player
       });
     /*
       Will mix the new players to the store

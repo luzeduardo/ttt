@@ -34,7 +34,7 @@ class RegisterPlayer extends React.Component {
   _modalhandleClose = () => {
       let modalPlayerName1 = this.state.modalPlayerName1;
       let modalPlayerName2 = this.state.modalPlayerName2;
-      let players = {[modalPlayerName1]:0, [modalPlayerName2]:0};
+      let players = {[modalPlayerName1]:0, [modalPlayerName2]:0, "Tie":0};
       this.props.dispatch({type:'REGISTER_PLAYERS', players});
       this.props.dispatch({type:'MODAL_PLAYER_CLOSE'});
 

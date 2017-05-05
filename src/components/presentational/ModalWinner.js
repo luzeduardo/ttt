@@ -4,6 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import {connect} from 'react-redux';
 import {List, ListItem} from 'material-ui/List';
 import object from 'lodash/object';
+import Snackbar from 'material-ui/Snackbar';
 
 /**
   Will display the winners inside a modal
@@ -28,8 +29,10 @@ class ModalWinner extends React.Component {
   */
   componentWillReceiveProps(props){
     let players = props.players.players;
+    let lastWinner = props.players.last;
     this.setState({
       open: props.status,
+      lastWinner,
       winners: object.values(players).sort().reverse(),
       winnerNames: Object.keys(players).sort(function(a,b){return players[a]-players[b]}).reverse()
     });
@@ -53,6 +56,11 @@ class ModalWinner extends React.Component {
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
+          <Snackbar
+            open={this.state.open}
+            message={this.state.lastWinner}
+            autoHideDuration={2000}
+          />
           <List>
             {this.state.winners.map((playerWins, index) =>
                 <ListItem

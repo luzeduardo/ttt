@@ -40,7 +40,10 @@ class TicTacToeBoard extends React.Component {
     }
 
     if(this.state.status === "playing" && newState.positionsMarkedA.length === 5){
-      this.setState({status:"stalemate"});
+      this.setState({status:"tie"});
+      this.props.dispatch({type:'REGISTER_WINNER', player: 'Tie'});
+      this.props.dispatch({type:'MODAL_WINNER_OPEN'});
+      this.setState(this._reset());
     }
   }
 
@@ -122,7 +125,7 @@ class TicTacToeBoard extends React.Component {
   */
   _validateWinner = (statusPlayer, player, status) => {
     if(statusPlayer && status === "playing"){
-      this.setState({status:"finish", "winner": player});
+      this.setState({status: "finish", "winner": player});
       this.props.dispatch({type:'REGISTER_WINNER', player});
       this.props.dispatch({type:'MODAL_WINNER_OPEN'});
       this.setState(this._reset());
@@ -134,7 +137,6 @@ class TicTacToeBoard extends React.Component {
       <div>
         <RegisterPlayer status={this.props.uiControl.modalRegisterPlayer}/>
         <ModalWinner status={this.props.uiControl.modalWinnerList}/>
-
         <Board cols={3.3} itemLength={9} onClick={this.state.status === "playing" || this.state.status === "start" ? this._registerChoice: null}
         style={styles.gridList}
         styleRoot={styles.root}
@@ -151,6 +153,7 @@ const mapStateToProps = (state) => ({
   players: state.playerNames,
   uiControl: state.uiControl
 });
+
 /*export the plain component that will be used for unittest without store*/
 export {TicTacToeBoard};
 /*connects the component to the store*/
