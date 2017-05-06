@@ -6,7 +6,8 @@
     "chai": "^3.5.0",
     "enzyme": "^2.8.2",
     "react-addons-test-utils": "^15.5.1",
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "sinon": "^2.2.0"
   },
   "dependencies": {
     "lodash": "^4.17.4",
