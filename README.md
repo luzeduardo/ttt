@@ -3,7 +3,7 @@
 [![Code Climate](https://codeclimate.com/github/luzeduardo/ttt/badges/gpa.svg)](https://codeclimate.com/github/luzeduardo/ttt)
 
 
-This is a tic tac Tic Tac Toe made with React
+This is a Progressive Web App Tic Tac Toe made with React
 [`create-react-app`](https://github.com/facebookincubator/create-react-app) tool.
 
 ## Local exec if you have docker and docker-compose installed
