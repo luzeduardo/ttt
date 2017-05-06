@@ -18,7 +18,8 @@ Access: [`http://localhost:3000/`](http://localhost:3000/)
 ```bash
 git clone git@github.com:luzeduardo/ttt.git
 cd ttt
-npm installednpm start
+npm install
+npm start
 ```
 Access: [`http://localhost:3000/`](http://localhost:3000/)
 
