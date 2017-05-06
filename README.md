@@ -1,4 +1,7 @@
 ## What's this project?
+[![build status](https://img.shields.io/travis/luzeduardo/ttt/master.svg?style=flat-square)](https://travis-ci.org/luzeduardo/ttt)
+[![Code Climate](https://codeclimate.com/github/luzeduardo/ttt/badges/gpa.svg)](https://codeclimate.com/github/luzeduardo/ttt)
+
 
 This is a tic tac Tic Tac Toe made with React
 [`create-react-app`](https://github.com/facebookincubator/create-react-app) tool.
