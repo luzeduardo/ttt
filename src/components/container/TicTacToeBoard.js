@@ -6,10 +6,6 @@ import ModalWinner from '../presentational/ModalWinner';
 import {connect} from 'react-redux';
 
 const styles = {
-  root: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
   gridList: {
     width: '100%',
     height: '100%',
@@ -139,7 +135,6 @@ class TicTacToeBoard extends React.Component {
         <ModalWinner status={this.props.uiControl.modalWinnerList}/>
         <Board cols={3.3} itemLength={9} onClick={this.state.status === "playing" || this.state.status === "start" ? this._registerChoice: null}
         style={styles.gridList}
-        styleRoot={styles.root}
         itemGridStyle={this.state.positionsColor} />
       </div>
     )

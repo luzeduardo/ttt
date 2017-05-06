@@ -2,7 +2,6 @@ import React from 'react';
 import {shallow, mount} from 'enzyme';
 import {expect} from 'chai';
 import sinon from 'sinon';
-
 import ItemBoard from './ItemBoard';
 
 describe('Shallow Rendering', () => {
@@ -12,17 +11,13 @@ describe('Shallow Rendering', () => {
         expect(wrapper).to.have.length(1);
     });
 
-    it('call an event when clicked', () => {
-        const event = () => {
-
-        }
-        const item = mount(<ItemBoard onClick={event} />);
-        console.log(item);
-        // const item = app.find('#item-1');
-        // item.simulate('click');
-        // expect(app.find('.completed').length).toBe(1);
-        // item.simulate('click');
-        // expect(app.find('.completed').length).toBe(0);
+    it('simulates click events', () => {
+      const onButtonClick = sinon.spy();
+      const wrapper = shallow(
+        <ItemBoard onClick={onButtonClick} />
+      );
+      wrapper.simulate('click');
+      expect(onButtonClick).to.have.property('callCount', 1);
     });
 
 });

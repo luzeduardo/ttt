@@ -9,18 +9,16 @@ import PropTypes from 'prop-types';
   on ItemBoard click
 */
 const Board = (props) => (
-      <div style={props.styleRoot}>
         <GridList
           cols={props.cols}
           style={props.style}
         >
-          {[...Array(props.itemLength).keys()].map((x) =>
-            <ItemBoard key={x} id={x} onClick={props.onClick}
-            itemGridStyle={props.itemGridStyle[x]}
-            />
-          )}
+        {
+          [...Array(props.itemLength).keys()].map((x)=>
+            (<ItemBoard key={x} id={x} itemGridStyle={props.itemGridStyle[x]} onClick={props.onClick}/>)
+          )
+        }
         </GridList>
-      </div>
 );
 
 Board.propTypes = {
