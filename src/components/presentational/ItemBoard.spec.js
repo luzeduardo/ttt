@@ -1,24 +1,28 @@
 import React from 'react';
-import {shallow, mount, render} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import {expect} from 'chai';
+import sinon from 'sinon';
 
 import ItemBoard from './ItemBoard';
 
 describe('Shallow Rendering', () => {
 
-    it('to have GridTile', () => {
-        const wrapper = shallow(<GridTile />);
-        console.log(GridTile);
-        // expect(wrapper.find('FormControl')).to.have.length(2);
+    it('to have ItemBoard', () => {
+        const wrapper = shallow(<ItemBoard />);
+        expect(wrapper).to.have.length(1);
     });
 
-    // it('to have one Button', () => {
-    //     const wrapper = shallow(<Simulador />);
-    //     expect(wrapper.find('Button')).to.have.length(1);
-    // });
-    //
-    // it('to have one textarea', () => {
-    //     const wrapper = shallow(<Simulador />);
-    //     expect(wrapper.find('FormControl').filter({componentClass: 'textarea'})).to.have.length(1);
-    // });
+    it('call an event when clicked', () => {
+        const event = () => {
+
+        }
+        const item = mount(<ItemBoard onClick={event} />);
+        console.log(item);
+        // const item = app.find('#item-1');
+        // item.simulate('click');
+        // expect(app.find('.completed').length).toBe(1);
+        // item.simulate('click');
+        // expect(app.find('.completed').length).toBe(0);
+    });
+
 });
