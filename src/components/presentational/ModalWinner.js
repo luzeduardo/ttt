@@ -56,11 +56,10 @@ class ModalWinner extends React.Component {
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
-          <Snackbar
-            open={this.state.open}
-            message={this.state.lastWinner}
-            autoHideDuration={2000}
-          />
+          {
+            this.props.status ?
+            <Snackbar open={this.state.open} message={this.state.lastWinner} autoHideDuration={2000} /> : null
+          }
           <List>
             {this.state.winners.map((playerWins, index) =>
                 <ListItem
