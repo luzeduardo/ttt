@@ -133,7 +133,8 @@ class TicTacToeBoard extends React.Component {
       <div>
         <RegisterPlayer status={this.props.uiControl.modalRegisterPlayer}/>
         <ModalWinner status={this.props.uiControl.modalWinnerList}/>
-        <Board cols={3.3} itemLength={9} onClick={this.state.status === "playing" || this.state.status === "start" ? this._registerChoice: null}
+        <Board cols={3.3} itemLength={9}
+        onClick={this.state.status === "playing" || this.state.status === "start" ? this._registerChoice: null}
         style={styles.gridList}
         itemGridStyle={this.state.positionsColor} />
       </div>
