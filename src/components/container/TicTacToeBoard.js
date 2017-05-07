@@ -35,7 +35,9 @@ class TicTacToeBoard extends React.Component {
       this._validateWinner(winnerB, playersNow[1], newState.status);
     }
 
-    if(this.state.status === "playing" && newState.positionsMarkedA.length === 5){
+    if(newState.status === "playing"
+        && newState.positionsMarkedA.length === 5
+        && !winnerA && !winnerB){
       this.setState({status:"tie"});
       this.props.dispatch({type:'REGISTER_WINNER', player: 'Tie'});
       this.props.dispatch({type:'MODAL_WINNER_OPEN'});
