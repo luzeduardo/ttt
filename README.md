@@ -1,7 +1,7 @@
 ## What's this project?
 [![build status](https://img.shields.io/travis/luzeduardo/ttt/master.svg?style=flat-square)](https://travis-ci.org/luzeduardo/ttt)
 [![Code Climate](https://codeclimate.com/github/luzeduardo/ttt/badges/gpa.svg)](https://codeclimate.com/github/luzeduardo/ttt)
-
+[![Coverage Status](https://coveralls.io/repos/github/luzeduardo/ttt/badge.svg?branch=master)](https://coveralls.io/github/luzeduardo/ttt?branch=master)
 
 This is a Progressive Web App Tic Tac Toe made with React
 [`create-react-app`](https://github.com/facebookincubator/create-react-app) tool.
