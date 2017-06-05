@@ -20,7 +20,6 @@ class AppRouter extends React.Component {
 
   render() {
     return (
-      /*Provide the store to the component tree*/
       <Provider store={store}>
         <Router>
           <div>

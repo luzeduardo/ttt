@@ -19,7 +19,7 @@ describe('playerReducer', () => {
     )
   });
 
-  it('Should handle REGISTER_PLAYERS FOR 1', () => {    
+  it('Should handle REGISTER_PLAYERS FOR 1', () => {
     let action = {type: 'REGISTER_PLAYERS', 'players':['A']};
     expect(
       playerNames({}, action)
@@ -45,5 +45,4 @@ describe('playerReducer', () => {
       }
     )
   });
-
 });

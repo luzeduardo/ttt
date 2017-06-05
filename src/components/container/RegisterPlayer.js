@@ -27,10 +27,6 @@ class RegisterPlayer extends React.Component {
       this.setState({modalOpen: true});
   };
 
-  /**
-    On modal close the information of user name will set inside state and then
-    will be published in the store with dispatch to the entire component connected
-  */
   _modalhandleClose = () => {
       let modalPlayerName1 = this.state.modalPlayerName1;
       let modalPlayerName2 = this.state.modalPlayerName2;
@@ -86,15 +82,10 @@ class RegisterPlayer extends React.Component {
   }
 }
 
-/*
-  Get the props from the store and share inside the component
-*/
 const mapStateToProps = (state) => ({
   players: state.playerNames,
   uiControl: state.uiControl
 });
 
-/*export the plain component that will be used for unittest without store*/
 export {RegisterPlayer};
-/*connects the component to the store*/
 export default (connect(mapStateToProps)(RegisterPlayer));

@@ -6,9 +6,6 @@ import {List, ListItem} from 'material-ui/List';
 import object from 'lodash/object';
 import Snackbar from 'material-ui/Snackbar';
 
-/**
-  Will display the winners inside a modal
-*/
 class ModalWinner extends React.Component {
   constructor(props){
     super(props);
@@ -23,10 +20,6 @@ class ModalWinner extends React.Component {
     this.props.dispatch({type:'MODAL_PLAYER_OPEN'});
   };
 
-  /*
-    Receives an object that contain the players with the number of
-    victories and sort in descending order
-  */
   componentWillReceiveProps(props){
     let players = props.players.players;
     let lastWinner = props.players.last;
@@ -75,15 +68,11 @@ class ModalWinner extends React.Component {
     );
   }
 }
-/*
-  Get the props from the store and share inside the component
-*/
+
 const mapStateToProps = (state) => ({
   players: state.playerNames,
   uiControl: state.uiControl
 });
 
-/*export the plain component that will be used for unittest without store*/
 export {ModalWinner};
-/*connects the component to the store*/
 export default (connect(mapStateToProps)(ModalWinner));

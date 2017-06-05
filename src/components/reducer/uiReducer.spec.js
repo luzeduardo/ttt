@@ -45,5 +45,4 @@ describe('uiReducer', () => {
       uiControl({}, action)
     ).to.eql({})
   });
-
 });

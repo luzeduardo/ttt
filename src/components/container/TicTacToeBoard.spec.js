@@ -6,14 +6,6 @@ import {TicTacToeBoard} from './TicTacToeBoard';
 import RegisterPlayer from './RegisterPlayer';
 import Board from '../presentational/Board';
 
-// beforeEach(() => {
-//     props = {
-//       "uiControl" : {
-//         "modalRegisterPlayer":false
-//       }
-//     };
-// });
-
 describe('Render Game', () => {
     it('to have Game', () => {
         let props = {
@@ -24,16 +16,6 @@ describe('Render Game', () => {
         const wrapper = shallow(<TicTacToeBoard {...props}/>);
         expect(wrapper).to.have.length(1);
     });
-
-    // it('to show Register Player Modal', () => {
-    //     let props = {
-    //       "uiControl" : {
-    //         "modalRegisterPlayer":true
-    //       }
-    //     }
-    //     const wrapper = shallow(<TicTacToeBoard uiControl={props}/>);
-    //     expect(wrapper).to.have.length(1);
-    // });
 
     it('to check position without winner with playing state',()=>{
         let props = {
@@ -123,7 +105,6 @@ describe('Render Game', () => {
         wrapper.instance()._registerChoice({target:{id:1}});
         wrapper.instance()._registerChoice({target:{id:4}});
         wrapper.instance()._registerChoice({target:{id:2}});
-        //game was reseted after player 1 win
         expect(wrapper.instance().state.status).to.equal("start");
     });
 });
